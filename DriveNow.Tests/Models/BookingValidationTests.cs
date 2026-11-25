@@ -50,6 +50,15 @@ public class BookingValidationTests
     }
 
     [Fact]
+    public void BookingWithoutLocation_FailsValidation()
+    {
+        var booking = CreateValidBooking();
+        booking.LocationId = 0;
+
+        Assert.Contains(Validate(booking), r => r.MemberNames.Contains(nameof(Booking.LocationId)));
+    }
+
+    [Fact]
     public void Days_IsNumberOfDaysBetweenDates()
     {
         var booking = CreateValidBooking();
@@ -86,6 +95,7 @@ public class BookingValidationTests
     private static Booking CreateBooking(int startOffset, int endOffset) => new()
     {
         CarId = 1,
+        LocationId = 1,
         CustomerName = "Test Customer",
         StartDate = DateTime.Today.AddDays(startOffset),
         EndDate = DateTime.Today.AddDays(endOffset)

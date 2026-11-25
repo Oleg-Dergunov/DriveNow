@@ -30,6 +30,4 @@ public class Car
     [Required(ErrorMessage = "Fuel type is required.")]
     [StringLength(20, ErrorMessage = "Fuel type cannot exceed 20 characters.")]
     public string FuelType { get; set; } = "Petrol";
-
-    public string DisplayName => $"{Make} {Model} ({RegistrationNumber})";
 }
