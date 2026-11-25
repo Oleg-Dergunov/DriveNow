@@ -1,10 +1,17 @@
 using DriveNow.Components;
+using DriveNow.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+var apiBaseAddress = new Uri(builder.Configuration["ApiUrls:Egolance"]!);
+
+builder.Services.AddHttpClient<ICarService, CarService>(ConfigureApiClient);
+builder.Services.AddHttpClient<IBookingService, BookingService>(ConfigureApiClient);
+builder.Services.AddHttpClient<ILocationService, LocationService>(ConfigureApiClient);
 
 var app = builder.Build();
 
@@ -25,3 +32,9 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+void ConfigureApiClient(HttpClient client)
+{
+    client.BaseAddress = apiBaseAddress;
+    client.Timeout = TimeSpan.FromSeconds(30);
+}
