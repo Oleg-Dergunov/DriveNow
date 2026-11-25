@@ -12,6 +12,7 @@ var apiBaseAddress = new Uri(builder.Configuration["ApiUrls:Egolance"]!);
 builder.Services.AddHttpClient<ICarService, CarService>(ConfigureApiClient);
 builder.Services.AddHttpClient<IBookingService, BookingService>(ConfigureApiClient);
 builder.Services.AddHttpClient<ILocationService, LocationService>(ConfigureApiClient);
+builder.Services.AddScoped<IRentalService, RentalService>();
 
 var app = builder.Build();
 
