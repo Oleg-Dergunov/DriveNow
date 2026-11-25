@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DriveNow.Tests/DriveNow.Tests.csproj" />
+  <Project Path="DriveNow/DriveNow.csproj" />
+</Solution>
